@@ -1,20 +1,24 @@
-const db = require('../../database/models');
+const { validationResult } = require('express-validator');
+const createError = require('http-errors');
+
+// ******** Sequelize ***********
+
+const { Product, Brand, Category } = require('../../database/models');
 
 module.exports = {
 	
-	// Root - Show all products
 	latest: (req, res, next) => {
-			 db.Product.findAll(
+			 Product.findAll(
 				{order: [['createdAt', 'DESC']],
-				limit : 3})
-				.then ((data) => {
+				limit : 4})
+				.then ((result) => {
 					res.json ({
 						meta: {
 							status: 200,
-							count: data.length,
+							count: result.length,
 							url: "api/products/latest"
 							},
-						data: data}
+						data: result}
 					)
 				})
 				.catch (errors => {
@@ -23,17 +27,17 @@ module.exports = {
 	},
 
 	offers: (req, res, next) => {
-		db.Product.findAll(
+		Product.findAll(
 			{ order: [['discount','DESC']],
-			limit : 7})
-			.then ((data) => {
+			limit : 4})
+			.then ((result) => {
 				res.json ({
 					meta: {
 						status: 200,
-						count: data.length,
+						count: result.length,
 						url: "api/products/offers"
 						},
-					data: data}
+					data: result}
 				)
 			})
 			.catch (errors => {

@@ -2,6 +2,7 @@
 <html lang="es">
 <!-- Include Head -->
 <%- include('partials/head', { title: 'Inicio' }) %>
+
 <script src="js/products.js"></script>
 <body>
 	<!-- Header -->
@@ -45,7 +46,7 @@
 							<% }); %> 
 						<% } else { %>
 							<div class="col-12">
-								<h2 class="noproducts">Aun se encontraron productos</h2>
+								<h2 class="noproducts">Aun se no encontraron productos</h2>
 							</div>
 						<% } %>
 				</div>
@@ -85,7 +86,7 @@
 				<% }); %>
 				<% } else { %>
 				<div class="col-12">
-					<h2 class="noproducts">Aun se encontraron productos</h2>
+					<h2 class="noproducts">Aun se no encontraron productos</h2>
 				</div>
 				<% } %>
 			</div>
