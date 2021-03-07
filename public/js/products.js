@@ -1,20 +1,25 @@
 window.onload = () =>{
+
     fetch('http://localhost:3000/api/products/latest')
     .then(response => response.json())
     .then(json => {
 
-        let product = json.data;
-        let latestProducts = document.getElementById('latest-products')
+            let a = document.querySelectorAll('a.aLatest')
+            let img = document.querySelectorAll('img.imgLatest')
+            let h2 = document.querySelectorAll('h2.h2Latest')
+            let span = document.querySelectorAll('span.spanLatest')
+            let p = document.querySelectorAll('p.pLatest')
 
-            for(let i= 0; i < latestProducts.childElementCount; i++) {
-                latestProducts.children[i].querySelector('a').href = '/products/detail/' + product[i].id;
-                latestProducts.children[i].querySelector('img').src = '/images/products/' + product[i].image;
-                latestProducts.children[i].querySelector('img').alt = product[i].name;
-                latestProducts.children[i].querySelector('h2').innerText = '$ ' + Math.trunc(product[i].price * product.discount / 100);
-                latestProducts.children[i].querySelector('span').innerText = product[i].discount + '% OFF';
-                latestProducts.children[i].querySelector('p').innerText = product[i].name;
-        }
-    })
+            for (let i = 0; i < json.meta.count; i++) {
+
+                a[i].href = `/products/detail/${json.data[i].id}`
+                img[i].src = `/images/products/${json.data[i].image}`
+                img[i].alt = `${json.data[i].name}`
+                h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
+                span[i].innerHTML = `${json.data[i].discount} % OFF`
+                p[i].innerHTML = `${json.data[i].name}`
+            }
+        })
 
     .catch(err => console.log(err))
 
@@ -22,17 +27,21 @@ window.onload = () =>{
     .then(response => response.json())
     .then(json => {
 
-        let product = json;
-        let offersProducts = document.getElementById('offers-products')
+            let a = document.querySelectorAll('a.aOffers')
+            let img = document.querySelectorAll('img.imgOffers')
+            let h2 = document.querySelectorAll('h2.h2Offers')
+            let span = document.querySelectorAll('span.spanOffers')
+            let p = document.querySelectorAll('p.pOffers')
 
-            for(let i= 0; i < offersProducts.childElementCount; i++) {
-                offersProducts.children[i].querySelector('a').href = '/products/detail/' + product[i].id;
-                offersProducts.children[i].querySelector('img').src = '/images/products/' + product[i].image;
-                offersProducts.children[i].querySelector('img').alt = product[i].name;
-                offersProducts.children[i].querySelector('h2').innerText = '$ ' + Math.trunc(product[i].price * products.discount / 100);
-                offersProducts.children[i].querySelector('span').innerText = products[i].discount + '% OFF';
-                offersProducts.children[i].querySelector('p').innerText = products[i].name;
-        }
+            for (let i = 0; i < json.meta.count; i++) {
+
+                a[i].href = `/products/detail/${json.data[i].id}`
+                img[i].src = `/images/products/${json.data[i].image}`
+                img[i].alt = `${json.data[i].name}`
+                h2[i].innerHTML = `$ ${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
+                span[i].innerHTML = `${json.data[i].discount} % OFF`
+                p[i].innerHTML = `${json.data[i].name}`
+            }
     })
 
     .catch(err => console.log(err))
