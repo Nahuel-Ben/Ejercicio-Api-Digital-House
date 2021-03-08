@@ -50,15 +50,39 @@ module.exports = {
 		)
 		
 	},
+	async categories (req, res) {
+		let where = {};
+		let products = [];
+		let title = "Todos los productos";
 
-	productsCategory: (req, res, next) => {
-		Category.findOne(
-			{where: {name: req.params.category}},
-			{include: [{association: 'products'}]}
-			)
+		if (req.params.category) {
+			let category = await Category.findOne({
+				where: {
+				   name: req.params.category
+				},
+				include: ['products']
+			})
 
-			.then ((result) => {
-
+			.then((result) => {
+				
+				res.json ({
+					meta: {
+						status: 200,
+						count: result.length,
+						url: "api/products/" + req.params.category
+						},
+					data: result}
+				)
+			
+			title = req.params.category;
+			 
+			if (category) {
+				products = category.products
+			}});
+		} else {
+			products = await Product.findAll(where)
+			.then((result) => {
+				
 				res.json ({
 					meta: {
 						status: 200,
@@ -67,12 +91,13 @@ module.exports = {
 						},
 					data: result}
 				)
-			})
-			.catch (errors => {
-				res.send (errors)
-			}
-		)
-		
+			} );
+		}
+
+		let categories = await Category.findAll({
+			include: ['products']
+		});
+
+		res.json(categories)
 	}
-		
 }
