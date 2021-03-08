@@ -50,7 +50,40 @@ module.exports = {
 		)
 		
 	},
-	async categories (req, res) {
+
+	categories: (req, res, next) => {
+		if (req.params.category) {
+
+			Category.findOne ({
+				where: {
+					name: req.params.category
+				}, include: ['products']
+			})
+
+			.then (result => 
+				res.json({
+					meta: {
+						status: 200,
+						count: result.length,
+						url: "api/products/cateegories" + req.params.category
+						},
+					data: result})
+				)
+		} else{
+			Product.findAll()
+
+			.then (result => 
+				res.json ({
+					meta: {
+						status: 200,
+						count: result.length,
+						url: "api/products/categories"
+						},
+					data: result}))
+		}
+		
+	}
+	/* async categories (req, res) {
 		let where = {};
 		let products = [];
 		let title = "Todos los productos";
@@ -99,5 +132,5 @@ module.exports = {
 		});
 
 		res.json(categories)
-	}
+	} */
 }

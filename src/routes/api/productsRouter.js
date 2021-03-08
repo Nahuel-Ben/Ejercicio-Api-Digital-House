@@ -8,7 +8,7 @@ const {category} = require ('../../database/models/category')
 
 router.get('/latest', productsAPIController.latest);
 router.get('/offers', productsAPIController.offers);
-router.get('/:category?', productsAPIController.categories);
+router.get('/categories/:category?', productsAPIController.categories);
 
 
 module.exports = router;
