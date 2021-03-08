@@ -64,10 +64,10 @@ module.exports = {
 				res.json({
 					meta: {
 						status: 200,
-						count: result.length,
-						url: "api/products/cateegories" + req.params.category
+						url: "api/products/cateegories/" + req.params.category
 						},
 					data: result})
+					
 				)
 		} else{
 			Product.findAll()

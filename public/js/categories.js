@@ -1,6 +1,7 @@
-window.addEventListener('load', () => {
 
-    let outdoors = document.getElementById('Outdoors');
+window.addEventListener('load', (e) => {
+    e.preventDefault();
+    var outdoors = document.getElementById('Outdoors');
     let computers = document.getElementById('Computers');
     let industrial = document.getElementById('Industrial');
     let home = document.getElementById('Home');
@@ -10,10 +11,7 @@ window.addEventListener('load', () => {
     let music = document.getElementById('Music');
     let shoes = document.getElementById('Shoes');
 
-    fetch('http://localhost:3000/api' + window.location.pathname)
-            .then(response => response.json())
-            .then(json => {
-
+    function rewrite(json) {
     let section = document.querySelectorAll('section.product-box')
     let a = document.querySelectorAll('a.aCategory')
     let img = document.querySelectorAll('img.imgCategory')
@@ -31,28 +29,26 @@ window.addEventListener('load', () => {
         img[i].alt = `${json.data[i].name}`
         h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
         span[i].innerHTML = `${json.data[i].discount} % OFF`
-        p[i].innerHTML = /* `${json.data[i].name}` */'prueba usa datos de api'
-    }})
+        p[i].innerHTML = `${json.data[i].name}`
+    }}
 
+    fetch('http://localhost:3000/api' + window.location.pathname)
+            .then(response => response.json())
+            .then(json => {
 
+                rewrite(json)
+    })
+
+    
     outdoors.onclick = () => {
         
-        fetch('http://localhost:3000/api/products' + outdoors.innerHTML)
+        fetch('http://localhost:3000/api/products/categories/' + outdoors.innerHTML)
             
             .then(response => response.json())
             .then(json => {
-                    
-                for (let i = 0; i < json.meta.count; i++) {
 
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
-            }
-        )
+                rewrite(json)
+    })
     }
 
     computers.onclick = () => {
@@ -62,15 +58,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -82,15 +70,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -102,15 +82,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -122,15 +94,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -142,15 +106,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -162,15 +118,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -182,15 +130,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
@@ -202,15 +142,7 @@ window.addEventListener('load', () => {
             .then(response => response.json())
             .then(json => {
 
-                for (let i = 0; i < json.meta.count; i++) {
-
-                    a[i].href = `/products/detail/${json.data[i].id}`
-                    img[i].src = `/images/products/${json.data[i].image}`
-                    img[i].alt = `${json.data[i].name}`
-                    h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
-                    span[i].innerHTML = `${json.data[i].discount} % OFF`
-                    p[i].innerHTML = `${json.data[i].name}`
-                    }
+                rewrite(json)
             }
         )
     }
