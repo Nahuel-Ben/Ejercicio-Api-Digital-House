@@ -1,16 +1,7 @@
 
 window.addEventListener('load', (e) => {
     e.preventDefault();
-    var outdoors = document.getElementById('Outdoors');
-    let computers = document.getElementById('Computers');
-    let industrial = document.getElementById('Industrial');
-    let home = document.getElementById('Home');
-    let tools = document.getElementById('Tools');
-    let garden = document.getElementById('Garden');
-    let toys = document.getElementById('Toys');
-    let music = document.getElementById('Music');
-    let shoes = document.getElementById('Shoes');
-
+    
     function rewrite(json) {
     let section = document.querySelectorAll('section.product-box')
     let a = document.querySelectorAll('a.aCategory')
@@ -27,30 +18,31 @@ window.addEventListener('load', (e) => {
         a[i].href = `/products/detail/${json.data[i].id}`
         img[i].src = `/images/products/${json.data[i].image}`
         img[i].alt = `${json.data[i].name}`
-        h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
+        h2[i].innerHTML = '$' + /* `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}` */'gatito'
         span[i].innerHTML = `${json.data[i].discount} % OFF`
-        p[i].innerHTML = `${json.data[i].name}`
+        p[i].innerHTML = /* `${json.data[i].name}` */ 'Desde la api'
     }}
 
-    fetch('http://localhost:3000/api' + window.location.pathname)
+    fetch('http://localhost:3000/api/products')
             .then(response => response.json())
             .then(json => {
 
                 rewrite(json)
-    })
+            })
 
-    
+    let outdoors = document.getElementById('Outdoors');
     outdoors.onclick = () => {
         
-        fetch('http://localhost:3000/api/products/categories/' + outdoors.innerHTML)
+        fetch('http://localhost:3000/api/products/' + outdoors.innerHTML)
             
             .then(response => response.json())
             .then(json => {
 
-                rewrite(json)
+               rewrite(json)
     })
     }
 
+    let computers = document.getElementById('Computers');
     computers.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + computers.innerHTML)
@@ -63,6 +55,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let industrial = document.getElementById('Industrial');
     industrial.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + industrial.innerHTML)
@@ -75,6 +68,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let home = document.getElementById('Home');
     home.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + home.innerHTML)
@@ -87,6 +81,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let tools = document.getElementById('Tools');
     tools.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + tools.innerHTML)
@@ -99,6 +94,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let garden = document.getElementById('Garden');
     garden.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + garden.innerHTML)
@@ -111,6 +107,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let toys = document.getElementById('Toys');
     toys.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + toys.innerHTML)
@@ -123,6 +120,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let music = document.getElementById('Music');
     music.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + music.innerHTML)
@@ -135,6 +133,7 @@ window.addEventListener('load', (e) => {
         )
     }
 
+    let shoes = document.getElementById('Shoes');
     shoes.onclick = () => {
         
         fetch('http://localhost:3000/api/products/' + shoes.innerHTML)
