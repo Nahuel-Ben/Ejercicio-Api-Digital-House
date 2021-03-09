@@ -18,9 +18,9 @@ window.addEventListener('load', (e) => {
         a[i].href = `/products/detail/${json.data[i].id}`
         img[i].src = `/images/products/${json.data[i].image}`
         img[i].alt = `${json.data[i].name}`
-        h2[i].innerHTML = '$' + /* `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}` */'gatito'
+        h2[i].innerHTML = '$' + `${Math.trunc(json.data[i].price - json.data[i].price * json.data[i].discount /100)}`
         span[i].innerHTML = `${json.data[i].discount} % OFF`
-        p[i].innerHTML = /* `${json.data[i].name}` */ 'Desde la api'
+        p[i].innerHTML = `${json.data[i].name}`
     }}
 
     fetch('http://localhost:3000/api/products')
